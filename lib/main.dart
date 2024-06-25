@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:wall_art/ui/views/splash_view/splash_view.dart';
+import 'package:provider/provider.dart';
+import 'package:wall_art/core/view_models/onboard_slider_provider.dart';
+import 'package:wall_art/routes/route_names.dart';
+import 'package:wall_art/routes/routes.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => OnBoardSliderProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -11,15 +19,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: SplashView()
+    return const MaterialApp(
+      initialRoute: RouteName.onBoardSlider,
+      onGenerateRoute: AppRoutes.generateRoutes,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
-
