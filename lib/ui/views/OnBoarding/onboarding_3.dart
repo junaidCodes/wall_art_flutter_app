@@ -1,7 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:wall_art/ui/views/OnBoarding/Common/on_boarding.dart';
+import 'package:wall_art/ui/views/on_boarding/common/on_boarding.dart';
 import 'package:wall_art/utils/image_path.dart';
 
 // ignore: must_be_immutable

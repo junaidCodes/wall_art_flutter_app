@@ -21,7 +21,7 @@ class PrimaryButton extends StatelessWidget {
     this.height = 45,
     this.width = double.infinity, //370,
     this.buttonColor = Colors.amber,
-    this.textColor = AppColors.primaryColor,
+    this.textColor = Colors.white,
     this.fontSize = 16.0,
     this.loading = false,
   });
