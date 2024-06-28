@@ -6,8 +6,7 @@ class CustomTabBar extends StatefulWidget {
   final List<String> tabTitles;
   List<Widget> pages;
 
-  CustomTabBar({Key? key, required this.tabTitles, required this.pages})
-      : super(key: key);
+  CustomTabBar({super.key, required this.tabTitles, required this.pages});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -34,10 +33,10 @@ class _CustomTabBarState extends State<CustomTabBar>
         TabBar(
           indicatorColor: AppColors.primaryColor,
           indicatorSize: TabBarIndicatorSize.label,
-          unselectedLabelColor: AppColors.lightGrey,
+          unselectedLabelColor: Colors.white,
+          labelColor: Colors.amber,
           indicatorWeight: 3.2,
-          dividerColor: const Color(0xff7f7f7f).withOpacity(0.3),
-          overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+          dividerColor: Colors.amber,
           labelPadding: const EdgeInsets.symmetric(horizontal: 5),
           labelStyle: const TextStyle(
             fontSize: 14,

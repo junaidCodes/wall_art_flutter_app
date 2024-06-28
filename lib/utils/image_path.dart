@@ -5,5 +5,17 @@ class PathToImage {
   static const String onBoard3 = 'assets/jpg/onBoard3.jpg';
   static const String background = 'assets/jpg/background.jpg';
 
+  static const List<String> weeding = [
+    'assets/weeding/w1.jpeg',
+    'assets/weeding/w2.jpeg',
+    'assets/weeding/w3.jpeg',
+    'assets/weeding/w4.jpeg',
+    'assets/weeding/w5.jpeg',
+    'assets/weeding/w6.jpeg',
+    'assets/weeding/w7.jpeg',
+    'assets/weeding/w8.jpeg',
+    'assets/weeding/w9.jpeg',
+  ];
+
 // Add more image paths here as needed
 }

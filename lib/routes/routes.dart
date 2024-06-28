@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wall_art/ex.dart';
+import 'package:wall_art/ui/views/home_screen.dart';
 import 'package:wall_art/routes/route_names.dart';
 import 'package:wall_art/ui/views/on_boarding/common/onboard_slider.dart';
 

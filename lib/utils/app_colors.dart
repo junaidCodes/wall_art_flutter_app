@@ -9,6 +9,6 @@ class AppColors {
 
   static const Color txtColor = Color(0xff7F7F7F);
 
-  static const Color secondaryColor = Color(0xff282828);
+  static const Color whiteColor = Colors.white;
   static Color borderColor = const Color(0xff7f7f7f).withOpacity(0.5);
 }

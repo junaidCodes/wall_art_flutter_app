@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wall_art/utils/app_colors.dart';
 
 // ignore: must_be_immutable
 class PrimaryButton extends StatelessWidget {

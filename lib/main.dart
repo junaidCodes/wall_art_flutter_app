@@ -1,17 +1,22 @@
 import 'package:device_preview/device_preview.dart';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:wall_art/core/view_models/onboard_slider_provider.dart';
 import 'package:wall_art/routes/route_names.dart';
 import 'package:wall_art/routes/routes.dart';
+import 'package:wall_art/utils/app_colors.dart';
+import 'package:wall_art/utils/button.dart';
+import 'package:wall_art/utils/ex.dart';
+import 'package:wall_art/utils/image_path.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(
     DevicePreview(
-      enabled: false,
+      enabled: true,
       builder: (context) => const MyApp(),
     ),
   );
@@ -40,9 +45,8 @@ class MyApp extends StatelessWidget {
         initialRoute: RouteName.exampleW,
 
         onGenerateRoute: AppRoutes.generateRoutes,
+        // home: SalonServicesView(),
       ),
     );
   }
 }
-
-class Routes {}

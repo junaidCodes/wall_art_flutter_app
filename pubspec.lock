@@ -33,6 +33,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  auto_size_text:
+    dependency: transitive
+    description:
+      name: auto_size_text
+      sha256: "3f5261cd3fb5f2a9ab4e2fc3fba84fd9fcaac8821f20a1d4e71f557521b22599"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  awesome_drawer_bar:
+    dependency: "direct main"
+    description:
+      name: awesome_drawer_bar
+      sha256: "6fddeb0e3e144be6d872a68bd9760e5e15299e561e4aab82895aaf02690bdc9c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
+  badges:
+    dependency: "direct main"
+    description:
+      name: badges
+      sha256: a7b6bbd60dce418df0db3058b53f9d083c22cdb5132a052145dc267494df0b84
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -134,6 +158,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_adaptive_scaffold:
+    dependency: transitive
+    description:
+      name: flutter_adaptive_scaffold
+      sha256: "28ba468c0183f6632cb222298f47f74c6c0888580784757d6a4ceeba00be6154"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.9"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -155,6 +187,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
+  flutter_side_menu:
+    dependency: "direct main"
+    description:
+      name: flutter_side_menu
+      sha256: "60a20aab560d170c70084a6007aa8d2087649c7d2b75cc887c17f3ba4ea6372f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter

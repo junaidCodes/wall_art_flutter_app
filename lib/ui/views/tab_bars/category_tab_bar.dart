@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wall_art/ui/views/on_boarding/common/text_button.dart';
 import 'package:wall_art/utils/app_colors.dart';
 import 'package:wall_art/utils/image_path.dart';
 
@@ -14,128 +11,62 @@ class CategoryTabBar extends StatefulWidget {
 }
 
 class _CategoryTabBarState extends State<CategoryTabBar> {
-  List img = [PathToImage.onBoard1, PathToImage.onBoard2, PathToImage.onBoard3];
+  List img = PathToImage.weeding;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        children: [
-          categoryNames("Fantasy and Sci-Fi", "See More", () {}),
-          SizedBox(
-              height: 180,
-              child: PageView.builder(
-                  itemCount: img.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: Container(
-                        clipBehavior: Clip.antiAlias,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          // image: DecorationImage(
-                          //     fit: BoxFit.fitWidth, image: AssetImage(assetName))
-                        ),
-                        child: Image.asset(
-                          img[index],
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                    );
-                  })),
-          categoryNames("Abstract and Patterns", "See More", () {}),
-          SizedBox(
-              height: 180,
-              child: PageView.builder(
-                  itemCount: img.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: Container(
-                        clipBehavior: Clip.antiAlias,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          // image: DecorationImage(
-                          //     fit: BoxFit.fitWidth, image: AssetImage(assetName))
-                        ),
-                        child: Image.asset(
-                          img[index],
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                    );
-                  })),
-          categoryNames("Art and Illustrations", "See More", () {}),
-          SizedBox(
-              height: 180,
-              child: PageView.builder(
-                  itemCount: img.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: Container(
-                        clipBehavior: Clip.antiAlias,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          // image: DecorationImage(
-                          //     fit: BoxFit.fitWidth, image: AssetImage(assetName))
-                        ),
-                        child: Image.asset(
-                          img[index],
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                    );
-                  })),
-          categoryNames("Animals", "See More", () {}),
-          SizedBox(
-              height: 180,
-              child: PageView.builder(
-                  itemCount: img.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: Container(
-                        clipBehavior: Clip.antiAlias,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          // image: DecorationImage(
-                          //     fit: BoxFit.fitWidth, image: AssetImage(assetName))
-                        ),
-                        child: Image.asset(
-                          img[index],
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                    );
-                  })),
-        ],
-      ),
-    );
-  }
-}
-
-Widget categoryNames(String title, String sub, void Function() onPress) {
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Scaffold(
+        body: PageView(
       children: [
-        Text(
-          title,
-          style: GoogleFonts.inter(
-              fontSize: 20,
-              color: AppColors.primaryColor,
-              fontWeight: FontWeight.w500),
-        ),
-        TexttButton(
-            googleFonts: GoogleFonts.inter(
-                fontSize: 14,
-                color: AppColors.primaryColor,
-                fontWeight: FontWeight.w400),
-            text: sub,
-            onPressed: onPress)
+        Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Categories",
+              ),
+            ),
+            Expanded(
+              child: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: PathToImage.weeding.length,
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent:
+                      200.0, // Set the maximum width of each item
+                  mainAxisExtent: 100.0,
+                  mainAxisSpacing: 10.0,
+                  crossAxisSpacing:
+                      10.0, // Set spacing between items horizontally
+                ),
+                itemBuilder: (context, index) {
+                  return Container(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage(PathToImage.weeding[index])),
+                        border: Border.all(
+                            color: Colors.black), // optional: add border
+                        color: Colors.white, // optional: set background color
+                      ),
+                      child: Center(
+                          child: Text(
+                        "Nature",
+                        style: GoogleFonts.inter(
+                            fontSize: 16,
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.w500),
+                      )));
+                },
+              ),
+            ),
+          ],
+        )
       ],
-    ),
-  );
+    ));
+  }
 }
