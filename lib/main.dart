@@ -1,22 +1,23 @@
 import 'package:device_preview/device_preview.dart';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 import 'package:provider/provider.dart';
+import 'package:wall_art/core/view_models/favorite_service.dart';
 import 'package:wall_art/core/view_models/onboard_slider_provider.dart';
+import 'package:wall_art/core/view_models/wallpaper_service.dart';
 import 'package:wall_art/routes/route_names.dart';
 import 'package:wall_art/routes/routes.dart';
-import 'package:wall_art/utils/app_colors.dart';
-import 'package:wall_art/utils/button.dart';
 import 'package:wall_art/utils/ex.dart';
-import 'package:wall_art/utils/image_path.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  // await Future.delayed(const Duration(seconds: 10));
+  // FlutterNativeSplash.remove();
   runApp(
     DevicePreview(
-      enabled: true,
+      enabled: false,
       builder: (context) => const MyApp(),
     ),
   );
@@ -30,10 +31,13 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => OnBoardSliderProvider()),
+        ChangeNotifierProvider(create: (_) => WallpaperService()),
+        ChangeNotifierProvider(create: (_) => WallpaperService()),
+        ChangeNotifierProvider(create: (_) => FavoriteService()),
       ],
       child: MaterialApp(
         // ignore: deprecated_member_use
-        useInheritedMediaQuery: true,
+        useInheritedMediaQuery: false,
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
@@ -42,10 +46,10 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6B4897)),
           useMaterial3: true,
         ),
-        initialRoute: RouteName.exampleW,
+        initialRoute: RouteName.onBoardSlider,
 
         onGenerateRoute: AppRoutes.generateRoutes,
-        // home: SalonServicesView(),
+        // home: SliverPersistentAppBar(),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wall_art/utils/app_colors.dart';
 
 // ignore: must_be_immutable
 class PrimaryButton extends StatelessWidget {
@@ -27,31 +28,41 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-        highlightElevation: 0,
-        elevation: 0,
-        focusElevation: 0,
-        shape: RoundedRectangleBorder(
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.blue, Colors.green],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(25.5),
+      ),
+      child: MaterialButton(
+          highlightElevation: 0,
+          elevation: 0,
+          focusElevation: 0,
+          shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25.5),
-            side: const BorderSide(color: Colors.blueAccent)),
-        height: height,
-        minWidth: width,
-        color: buttonColor,
-        // splashColor: AppColors.lightGrey,s
-        // highlightColor: Colors.red,
-        hoverColor: const Color.fromARGB(255, 46, 41, 27),
-        onPressed: onPressed,
-        child: loading
-            ? const CircularProgressIndicator(
-                strokeWidth: 3,
-                color: Colors.white,
-              )
-            : Text(
-                text,
-                style: GoogleFonts.inter(
-                    fontSize: fontSize,
-                    fontWeight: FontWeight.w500,
-                    color: textColor),
-              ));
+          ),
+          height: height,
+          minWidth: width,
+          color: buttonColor,
+          // splashColor: AppColors.lightGrey,s
+          // highlightColor: Colors.red,
+          hoverColor: const Color.fromARGB(255, 46, 41, 27),
+          onPressed: onPressed,
+          child: loading
+              ? const CircularProgressIndicator(
+                  strokeWidth: 3,
+                  color: Colors.white,
+                )
+              : Text(
+                  text,
+                  style: GoogleFonts.inter(
+                      fontSize: fontSize,
+                      fontWeight: FontWeight.w500,
+                      color: textColor),
+                )),
+    );
   }
 }

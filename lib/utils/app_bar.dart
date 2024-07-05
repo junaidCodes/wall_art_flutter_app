@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wall_art/routes/route_names.dart';
 import 'package:wall_art/utils/app_colors.dart';
 import 'package:wall_art/utils/image_path.dart';
 
@@ -15,19 +16,28 @@ class _AppBarHomeState extends State<AppBarHome> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      flexibleSpace: SizedBox(
+      iconTheme: const IconThemeData(color: Colors.white),
+      // pinned: true,
+      flexibleSpace: Container(
           height: 350,
+          decoration: const BoxDecoration(),
           child: PageView.builder(
               controller: pageController,
-              itemCount: PathToImage.weeding.length,
+              itemCount: PathToImage.walpapers.length,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
+                return InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, RouteName.walpaperSlider,
+                        arguments: {
+                          'images': PathToImage.walpapers,
+                          'selectedIndex': index
+                        });
+                  },
                   child: Container(
                     clipBehavior: Clip.antiAlias,
                     decoration: const BoxDecoration(),
                     child: Image.asset(
-                      PathToImage.weeding[index],
+                      PathToImage.walpapers[index],
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -47,7 +57,6 @@ class _AppBarHomeState extends State<AppBarHome> {
           width: 20,
         )
       ],
-      pinned: true,
       title: Container(
         height: 28,
         width: 100,

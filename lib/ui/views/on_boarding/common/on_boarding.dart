@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wall_art/utils/app_colors.dart';
 
 // ignore: must_be_immutable
 class OnBoarding extends StatefulWidget {
@@ -74,7 +75,7 @@ class _OnBoardingState extends State<OnBoarding> {
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
-                                color: Colors.amberAccent,
+                                color: AppColors.whiteColor,
                               ),
                               textAlign: TextAlign.center,
                             ),
