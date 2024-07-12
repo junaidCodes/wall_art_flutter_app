@@ -1,18 +1,19 @@
-class WallpapersModel {
+// ignore: file_names
+class WallPapersModel {
   int id;
   String categoryName;
   String categoryImage;
   List<CategoryWallpaper> categoryWallpapers;
 
-  WallpapersModel({
+  WallPapersModel({
     required this.id,
     required this.categoryName,
     required this.categoryImage,
     required this.categoryWallpapers,
   });
 
-  factory WallpapersModel.fromJson(Map<String, dynamic> json) =>
-      WallpapersModel(
+  factory WallPapersModel.fromJson(Map<String, dynamic> json) =>
+      WallPapersModel(
         id: json["id"] ?? 0,
         categoryName: json["category_name"] ?? "",
         categoryImage: json["category_image"] ?? "",

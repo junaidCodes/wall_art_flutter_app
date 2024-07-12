@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wall_art/routes/route_names.dart';
-import 'package:wall_art/ui/views/walpaper_slider.dart';
+
 import 'package:wall_art/utils/app_colors.dart';
 import 'package:wall_art/utils/blue_green_container.dart';
-import 'package:wall_art/utils/image_path.dart';
 
 // ignore: must_be_immutable
-class WalpapersView extends StatefulWidget {
+class WallpapersView extends StatefulWidget {
   List images;
   String title;
-  WalpapersView({super.key, required this.images, this.title = "Wallpapers"});
+  WallpapersView({super.key, required this.images, this.title = "Wallpapers"});
 
   @override
-  State<WalpapersView> createState() => _WalpapersViewState();
+  State<WallpapersView> createState() => _WallpapersViewState();
 }
 
-class _WalpapersViewState extends State<WalpapersView> {
+class _WallpapersViewState extends State<WallpapersView> {
   @override
   Widget build(BuildContext context) {
     return BlueGreenContainer(

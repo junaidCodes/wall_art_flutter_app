@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,51 +21,49 @@ class OnBoardSlider extends StatefulWidget {
 }
 
 class _OnBoardSliderState extends State<OnBoardSlider> {
-  bool hideSkip = false;
   final controllerx = PageController();
   List onBoardList = [OnBoarding1View(), OnBoarding2View(), OnBoarding3View()];
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<OnBoardSliderProvider>(context, listen: false);
+    final provider = Provider.of<OnBoardSliderProvider>(context, listen: true);
 
     double h = MediaQuery.of(context).size.height;
     // ignore: unused_local_variable
     double w = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: AnnotatedRegion(
+        body: Consumer<OnBoardSliderProvider>(builder: (context, value, index) {
+      return AnnotatedRegion(
         value: const SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             statusBarIconBrightness: Brightness.dark),
         child: SizedBox(
           child: Stack(
             children: [
-              Consumer<OnBoardSliderProvider>(builder: (context, value, child) {
-                return SizedBox(
-                  height: h,
-                  child: PageView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    scrollBehavior: const ScrollBehavior(),
-                    controller: controllerx,
-                    children: [
-                      ...List.generate(3, (index) => onBoardList[index]),
-                    ],
-                    onPageChanged: (value) {
-                      provider.setCurrentIndex(value);
-                      setState(() {
-                        if (value == 2) {
-                          hideSkip = true;
-                        } else {
-                          hideSkip = false;
-                        }
-                      });
-                    },
-                  ),
-                );
-              }),
-              hideSkip == true
-                  ? SizedBox()
+              SizedBox(
+                height: h,
+                child: PageView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  scrollBehavior: const ScrollBehavior(),
+                  controller: controllerx,
+                  children: [
+                    ...List.generate(3, (index) => onBoardList[index]),
+                  ],
+                  onPageChanged: (value) {
+                    provider.setCurrentIndex(value);
+
+                    if (value == 2) {
+                      provider.hideSkip = true;
+                    } else {
+                      provider.hideSkip = false;
+                    }
+                    // });
+                  },
+                ),
+              ),
+              provider.hideSkip == true
+                  ? const SizedBox()
                   : Align(
                       alignment: Alignment.topRight,
                       child: Padding(
@@ -94,34 +90,32 @@ class _OnBoardSliderState extends State<OnBoardSlider> {
                             )),
                       ),
                     ),
-              Consumer<OnBoardSliderProvider>(builder: (context, value, child) {
-                return Align(
-                  alignment: Alignment(.1, .9),
+              Align(
+                alignment: const Alignment(.1, .9),
 
-                  // alignment: Alignment.bottomCenter,
-                  child: FractionallySizedBox(
-                    widthFactor: .5,
-                    child: PrimaryButton(
-                        buttonColor: Colors.transparent,
-                        text: provider.currentIndex == 0
-                            ? "Explore"
-                            : provider.currentIndex == 1
-                                ? "Explore More"
-                                : "Let's Start",
-                        onPressed: () {
-                          if (provider.currentIndex < onBoardList.length - 1) {
-                            provider.nextPage();
-                            controllerx.animateToPage(provider.currentIndex,
-                                duration: const Duration(seconds: 1),
-                                curve: Curves.fastOutSlowIn);
-                          } else if (provider.currentIndex == 2) {
-                            Navigator.pushNamedAndRemoveUntil(context,
-                                RouteName.homeScreen, (route) => false);
-                          }
-                        }),
-                  ),
-                );
-              }),
+                // alignment: Alignment.bottomCenter,
+                child: FractionallySizedBox(
+                  widthFactor: .5,
+                  child: PrimaryButton(
+                      buttonColor: Colors.transparent,
+                      text: provider.currentIndex == 0
+                          ? "Explore"
+                          : provider.currentIndex == 1
+                              ? "Explore More"
+                              : "Let's Start",
+                      onPressed: () {
+                        if (provider.currentIndex < onBoardList.length - 1) {
+                          provider.nextPage();
+                          controllerx.animateToPage(provider.currentIndex,
+                              duration: const Duration(seconds: 1),
+                              curve: Curves.fastOutSlowIn);
+                        } else if (provider.currentIndex == 2) {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, RouteName.homeScreen, (route) => false);
+                        }
+                      }),
+                ),
+              ),
               Align(
                 alignment: const Alignment(.75, .65),
                 child: FractionallySizedBox(
@@ -151,7 +145,7 @@ class _OnBoardSliderState extends State<OnBoardSlider> {
             ],
           ),
         ),
-      ),
-    );
+      );
+    }));
   }
 }

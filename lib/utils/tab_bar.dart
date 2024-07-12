@@ -64,35 +64,36 @@ class CustomTabTitles extends StatelessWidget {
   final List<String> tabTitles;
   final TabController tabController;
 
-  CustomTabTitles({required this.tabTitles, required this.tabController});
+  const CustomTabTitles(
+      {super.key, required this.tabTitles, required this.tabController});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.blue, Colors.green],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(25)),
-        child: TabBar(
-          indicatorColor: AppColors.primaryColor,
-          indicatorSize: TabBarIndicatorSize.label,
-          unselectedLabelColor: Colors.white,
-          labelColor: Colors.amber,
-          indicatorWeight: 3.2,
-          dividerColor: Colors.transparent,
-          labelPadding: const EdgeInsets.symmetric(horizontal: 5),
-          labelStyle: const TextStyle(
-            fontSize: 14,
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w400,
-          ),
-          controller: tabController,
-          tabs: tabTitles.map((title) => Tab(text: title)).toList(),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.blue, Colors.green],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
+        // borderRadius: BorderRadius.circular(25)
+      ),
+      child: TabBar(
+        indicatorColor: AppColors.primaryColor,
+        indicatorSize: TabBarIndicatorSize.label,
+        unselectedLabelColor: Colors.white,
+        labelColor: Colors.amber,
+        indicatorWeight: 3.2,
+        dividerColor: Colors.transparent,
+        labelPadding: const EdgeInsets.symmetric(horizontal: 5),
+        labelStyle: const TextStyle(
+          fontSize: 16,
+          fontFamily: 'Inter',
+          fontWeight: FontWeight.w400,
+          letterSpacing: 1,
+        ),
+        controller: tabController,
+        tabs: tabTitles.map((title) => Tab(text: title)).toList(),
       ),
     );
   }
@@ -102,7 +103,8 @@ class CustomTabPages extends StatelessWidget {
   final List<Widget> pages;
   final TabController tabController;
 
-  CustomTabPages({required this.pages, required this.tabController});
+  const CustomTabPages(
+      {super.key, required this.pages, required this.tabController});
 
   @override
   Widget build(BuildContext context) {

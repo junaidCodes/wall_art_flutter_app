@@ -47,6 +47,10 @@ dependencies:
   async_wallpaper: ^2.0.3
   dio: ^5.4.3+1
   floating_action_bubble: ^1.1.4
+  shared_preferences: ^2.2.3
+  flutter_launcher_icons: ^0.13.1
+  flutter_speed_dial: ^7.0.0
+  share_whatsapp: ^1.0.2
 
 
 flutter_native_splash:
@@ -72,6 +76,26 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
 
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/playstore.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/playstore.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/playstore.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/playstore.png"
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -91,6 +115,8 @@ flutter:
      - assets/walpapers/
      - assets/abstract/
      - assets/animal/
+     - assets/splashview.jpg
+
     
 
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wall_art/ui/views/favorite_walpapers.dart';
+
+import 'package:wall_art/ui/views/favorite_wallpapers_view.dart';
 import 'package:wall_art/utils/app_colors.dart';
 import 'package:wall_art/utils/blue_green_container.dart';
-import 'package:wall_art/utils/image_path.dart';
 
 class Drawerr extends StatefulWidget {
   const Drawerr({super.key});
@@ -40,14 +40,6 @@ class _DrawerrState extends State<Drawerr> {
                 ),
               ),
               ListTile(
-                leading: const Icon(Icons.home, color: AppColors.whiteColor),
-                title: Text(
-                  'Home',
-                  style: GoogleFonts.inter(color: AppColors.whiteColor),
-                ),
-                onTap: () => {},
-              ),
-              ListTile(
                 leading:
                     const Icon(Icons.favorite, color: AppColors.whiteColor),
                 title: Text(
@@ -58,28 +50,17 @@ class _DrawerrState extends State<Drawerr> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => FavoritesScreen()))
+                          builder: (context) =>
+                              const FavoritesWallpapersView()))
                 },
               ),
               ListTile(
-                leading: const Icon(
-                  Icons.category,
-                  color: AppColors.whiteColor,
-                ),
-                title: Text(
-                  'Categories',
-                  style: GoogleFonts.inter(color: AppColors.whiteColor),
-                ),
-                onTap: () => {},
-              ),
-              ListTile(
-                leading: const Icon(Icons.share, color: AppColors.whiteColor),
-                title: Text(
-                  'Share app',
-                  style: GoogleFonts.inter(color: AppColors.whiteColor),
-                ),
-                onTap: () => {},
-              ),
+                  leading: const Icon(Icons.share, color: AppColors.whiteColor),
+                  title: Text(
+                    'Share app',
+                    style: GoogleFonts.inter(color: AppColors.whiteColor),
+                  ),
+                  onTap: () {}),
               ListTile(
                 leading:
                     const Icon(Icons.settings, color: AppColors.whiteColor),

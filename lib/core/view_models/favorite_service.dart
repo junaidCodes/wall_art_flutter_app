@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wall_art/core/models/favorite.dart';
 
 class FavoriteService with ChangeNotifier {
-  List<Favorite> _favorites = [];
+  final List<Favorite> _favorites = [];
 
   List<Favorite> get favorites => _favorites;
 

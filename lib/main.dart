@@ -1,7 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'package:provider/provider.dart';
 import 'package:wall_art/core/view_models/favorite_service.dart';
@@ -9,7 +8,6 @@ import 'package:wall_art/core/view_models/onboard_slider_provider.dart';
 import 'package:wall_art/core/view_models/wallpaper_service.dart';
 import 'package:wall_art/routes/route_names.dart';
 import 'package:wall_art/routes/routes.dart';
-import 'package:wall_art/utils/ex.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +15,7 @@ void main() async {
   // FlutterNativeSplash.remove();
   runApp(
     DevicePreview(
-      enabled: false,
+      enabled: true,
       builder: (context) => const MyApp(),
     ),
   );
@@ -46,10 +44,10 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6B4897)),
           useMaterial3: true,
         ),
-        initialRoute: RouteName.onBoardSlider,
+        initialRoute: RouteName.splashView,
 
         onGenerateRoute: AppRoutes.generateRoutes,
-        // home: SliverPersistentAppBar(),
+        // home: MyApp1()
       ),
     );
   }

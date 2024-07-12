@@ -4,6 +4,8 @@ class PathToImage {
   static const String onBoard2 = 'assets/jpg/onBoard2.jpg';
   static const String onBoard3 = 'assets/jpg/onBoard3.jpg';
   static const String background = 'assets/jpg/background.jpg';
+  static const String splashview = 'assets/splashview.jpg';
+  static const String placeholder = 'assets/placeholder.jpg';
 
   static const List<String> weeding = [
     'assets/weeding/w1.jpeg',
