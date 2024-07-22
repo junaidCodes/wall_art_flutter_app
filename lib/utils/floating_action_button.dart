@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:wall_art/utils/app_colors.dart';
@@ -31,7 +33,9 @@ class _FloatingActionButtonWidgetState
       children: [
         SpeedDialChild(
             backgroundColor: Colors.transparent,
-            onTap: () {},
+            onTap: () {
+              log("message");
+            },
             label: "Download",
             child: Container(
               clipBehavior: Clip.hardEdge,

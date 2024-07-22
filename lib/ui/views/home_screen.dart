@@ -1,8 +1,4 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:wall_art/core/network/network_service.dart';
-import 'package:wall_art/core/network/network_service_home.dart';
 
 import 'package:wall_art/ui/views/tab_bars/category_tab.dart';
 import 'package:wall_art/ui/views/tab_bars/home_tab.dart';
