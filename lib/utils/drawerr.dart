@@ -39,39 +39,32 @@ class _DrawerrState extends State<Drawerr> {
                       fontWeight: FontWeight.w600),
                 ),
               ),
-              ListTile(
-                leading:
-                    const Icon(Icons.favorite, color: AppColors.whiteColor),
-                title: Text(
-                  'Favorites',
-                  style: GoogleFonts.inter(color: AppColors.whiteColor),
-                ),
-                onTap: () => {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const FavoritesWallpapersView()))
-                },
-              ),
-              ListTile(
-                  leading: const Icon(Icons.share, color: AppColors.whiteColor),
-                  title: Text(
-                    'Share app',
-                    style: GoogleFonts.inter(color: AppColors.whiteColor),
-                  ),
-                  onTap: () {}),
-              ListTile(
-                leading:
-                    const Icon(Icons.settings, color: AppColors.whiteColor),
-                title: Text(
-                  'Setting',
-                  style: GoogleFonts.inter(color: AppColors.whiteColor),
-                ),
-                onTap: () => {},
-              ),
+              listTile(
+                  title: "Favorite",
+                  onPress: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const FavoritesWallpapersView()));
+                  },
+                  icon: Icons.favorite),
+              listTile(title: "Share", onPress: () {}, icon: Icons.share),
+              listTile(title: "Setting", onPress: () {}, icon: Icons.settings),
             ],
           )),
+    );
+  }
+
+  Widget listTile(
+      {required String title, required VoidCallback onPress, required icon}) {
+    return ListTile(
+      leading: Icon(icon, color: AppColors.whiteColor),
+      title: Text(
+        title,
+        style: GoogleFonts.inter(color: AppColors.whiteColor),
+      ),
+      onTap: onPress,
     );
   }
 }

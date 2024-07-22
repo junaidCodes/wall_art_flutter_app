@@ -83,39 +83,7 @@ class _CategoryTabState extends State<CategoryTab> {
                 // var catWallpapers = data.categoryWallpapers.first.wallpaperImageUrl;
                 return InkWell(
                   onTap: () {
-                    switch (index) {
-                      case 0:
-                        Navigator.pushNamed(context, RouteName.walpapersView,
-                            arguments: {
-                              'arg': PathToImage.weeding,
-                              'title': categoryNames[index]
-                            });
-                        break;
-
-                      case 1:
-                        Navigator.pushNamed(context, RouteName.walpapersView,
-                            arguments: {
-                              'arg': PathToImage.abstract,
-                              'title': categoryNames[index]
-                            });
-                        break;
-                      case 2:
-                        Navigator.pushNamed(context, RouteName.walpapersView,
-                            arguments: {
-                              'arg': PathToImage.animal,
-                              'title': categoryNames[index]
-                            });
-                        break;
-                      case 3:
-                        Navigator.pushNamed(context, RouteName.walpapersView,
-                            arguments: {
-                              'arg': PathToImage.walpapers,
-                              'title': categoryNames[index]
-                            });
-                        break;
-                      default:
-                        log("default");
-                    }
+                    goToCategory(index);
                   },
                   child: Container(
                       decoration: BoxDecoration(
@@ -145,5 +113,37 @@ class _CategoryTabState extends State<CategoryTab> {
         ],
       ),
     );
+  }
+
+  void goToCategory(int index) {
+    switch (index) {
+      case 0:
+        Navigator.pushNamed(context, RouteName.walpapersView, arguments: {
+          'arg': PathToImage.weeding,
+          'title': categoryNames[index]
+        });
+        break;
+
+      case 1:
+        Navigator.pushNamed(context, RouteName.walpapersView, arguments: {
+          'arg': PathToImage.abstract,
+          'title': categoryNames[index]
+        });
+        break;
+      case 2:
+        Navigator.pushNamed(context, RouteName.walpapersView, arguments: {
+          'arg': PathToImage.animal,
+          'title': categoryNames[index]
+        });
+        break;
+      case 3:
+        Navigator.pushNamed(context, RouteName.walpapersView, arguments: {
+          'arg': PathToImage.walpapers,
+          'title': categoryNames[index]
+        });
+        break;
+      default:
+        log("default");
+    }
   }
 }

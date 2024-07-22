@@ -1,14 +1,20 @@
+import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:wall_art/core/view_models/wallpaper_service.dart';
 import 'package:wall_art/utils/app_colors.dart';
 import 'package:wall_art/utils/floating_action_button.dart';
 import 'package:wall_art/utils/image_path.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:wall_art/utils/snack_bar.dart';
 
 // ignore: must_be_immutable
 class WallpaperSlider extends StatefulWidget {
@@ -32,7 +38,7 @@ class _WallpaperSliderState extends State<WallpaperSlider>
   late AnimationController animationController;
 
   late Animation<double> _animation;
-  late String currentImageUrl;
+  String currentImageUrl = "";
 
   @override
   void initState() {
@@ -65,7 +71,6 @@ class _WallpaperSliderState extends State<WallpaperSlider>
               itemBuilder: (BuildContext context, index, pageViewIndex) {
                 final imagePath = widget.images[index], pathToSet = imagePath;
 
-
                 return Container(
                   height: MediaQuery.of(context).size.height,
                   width: double.infinity,
@@ -91,6 +96,21 @@ class _WallpaperSliderState extends State<WallpaperSlider>
                     service.notifyListner();
                   }),
             ),
+            Padding(
+              padding: const EdgeInsets.all(118.0),
+              child: Container(
+                  color: Colors.red,
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        String? filePath =
+                            await downloadAndSaveWallpaper(currentImageUrl);
+                        if (filePath != null) {
+                          context.showSnackBar("image saved in gallery",
+                              Colors.green, AppColors.whiteColor);
+                        }
+                      },
+                      child: Text("download"))),
+            ),
             Positioned(
               top: 40,
               left: 20,
@@ -110,7 +130,7 @@ class _WallpaperSliderState extends State<WallpaperSlider>
                     future: service.isFavorite(currentImageUrl),
                     builder: (context, snapshot) {
                       final isFavorite = snapshot.data ?? true;
-                     
+
                       return IconButton(
                         onPressed: () {
                           service.toggleFavorite(currentImageUrl, context);
@@ -130,5 +150,53 @@ class _WallpaperSliderState extends State<WallpaperSlider>
         ),
       );
     });
+  }
+
+  Future<void> requestStoragePermission() async {
+    if (await Permission.storage.request().isGranted) {
+      print("Storage permission granted.");
+    } else {
+      print("Storage permission denied.");
+    }
+  }
+
+  Future<String?> downloadAndSaveWallpaper(String url) async {
+    try {
+      await requestStoragePermission();
+
+      var dio = Dio();
+      Directory? directory;
+
+      if (Platform.isAndroid) {
+        directory = await getExternalStorageDirectory();
+        String newPath = "";
+        List<String> paths = directory!.path.split("/");
+        for (int i = 1; i < paths.length; i++) {
+          String path = paths[i];
+          if (path != "Android") {
+            newPath += "/" + path;
+          } else {
+            break;
+          }
+        }
+        newPath = newPath + "/Pictures/Wallpapers";
+        directory = Directory(newPath);
+      } else {
+        directory = await getApplicationDocumentsDirectory();
+      }
+
+      if (!await directory.exists()) {
+        await directory.create(recursive: true);
+      }
+
+      String fileName = url.split('/').last;
+      String filePath = "${directory.path}/$fileName";
+
+      await dio.download(url, filePath);
+      return filePath;
+    } catch (e) {
+      print("Error downloading wallpaper: $e");
+      return null;
+    }
   }
 }

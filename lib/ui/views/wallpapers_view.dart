@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wall_art/routes/route_names.dart';
@@ -56,10 +57,16 @@ class _WallpapersViewState extends State<WallpapersView> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.primaryColor),
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage(widget.images[index]))),
+                          border: Border.all(color: AppColors.primaryColor),
+                          // image: DecorationImage(
+                          //     fit: BoxFit.cover,
+                          //     image: AssetImage(widget.images[index])
+                          // )
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl: widget.images[index],
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     )),
           ),
