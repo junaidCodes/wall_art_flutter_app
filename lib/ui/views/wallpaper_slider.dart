@@ -5,9 +5,13 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dio/dio.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:wall_art/core/view_models/download_wallpaper.dart';
 
 import 'package:wall_art/core/view_models/wallpaper_service.dart';
 import 'package:wall_art/utils/app_colors.dart';
@@ -57,13 +61,30 @@ class _WallpaperSliderState extends State<WallpaperSlider>
 
   List<String> favorites = [];
 
+
   @override
   Widget build(BuildContext context) {
     final service = Provider.of<WallpaperService>(context, listen: false);
 
     return Consumer<WallpaperService>(builder: (context, value, child) {
       return Scaffold(
-        floatingActionButton: const FloatingActionButtonWidget(),
+        floatingActionButton:  FloatingActionButtonWidget(onTap: ()async{
+          // String? filePath =
+          // await Downloadwallpaper.downloadAndSaveWallpaper(currentImageUrl);
+          // if (filePath != null) {
+          //   context.showSnackBar("image saved in gallery",
+          //       Colors.green, AppColors.whiteColor);
+          // }
+
+          Downloadwallpaper.setWallpaperFromUrl(currentImageUrl, WallpaperManager.HOME_SCREEN,context);
+        },
+        onTapLock: (){
+          Downloadwallpaper.setWallpaperFromUrl(currentImageUrl, WallpaperManager.LOCK_SCREEN,context);
+        },
+          onTapBoth: (){
+            Downloadwallpaper.setWallpaperFromUrl(currentImageUrl, WallpaperManager.BOTH_SCREEN,context);
+          },
+        ),
         body: Stack(
           children: [
             CarouselSlider.builder(
@@ -76,13 +97,17 @@ class _WallpaperSliderState extends State<WallpaperSlider>
                   width: double.infinity,
                   decoration: const BoxDecoration(),
                   child: CachedNetworkImage(
+
+
                     imageUrl: pathToSet,
                     fit: BoxFit.fill,
                     errorWidget: (context, url, error) =>
                         const Center(child: Icon(Icons.error)),
-                    placeholder: (context, url) => Image.asset(
-                      PathToImage.placeholder,
-                      fit: BoxFit.fitHeight,
+                    placeholder: (context, url) =>  Shimmer.fromColors(
+                        baseColor: Colors.red,
+                        highlightColor: Colors.yellow,
+                        child: SizedBox(),
+
                     ),
                   ),
                 );
@@ -96,21 +121,7 @@ class _WallpaperSliderState extends State<WallpaperSlider>
                     service.notifyListner();
                   }),
             ),
-            Padding(
-              padding: const EdgeInsets.all(118.0),
-              child: Container(
-                  color: Colors.red,
-                  child: ElevatedButton(
-                      onPressed: () async {
-                        String? filePath =
-                            await downloadAndSaveWallpaper(currentImageUrl);
-                        if (filePath != null) {
-                          context.showSnackBar("image saved in gallery",
-                              Colors.green, AppColors.whiteColor);
-                        }
-                      },
-                      child: Text("download"))),
-            ),
+
             Positioned(
               top: 40,
               left: 20,
@@ -152,51 +163,6 @@ class _WallpaperSliderState extends State<WallpaperSlider>
     });
   }
 
-  Future<void> requestStoragePermission() async {
-    if (await Permission.storage.request().isGranted) {
-      print("Storage permission granted.");
-    } else {
-      print("Storage permission denied.");
-    }
   }
 
-  Future<String?> downloadAndSaveWallpaper(String url) async {
-    try {
-      await requestStoragePermission();
 
-      var dio = Dio();
-      Directory? directory;
-
-      if (Platform.isAndroid) {
-        directory = await getExternalStorageDirectory();
-        String newPath = "";
-        List<String> paths = directory!.path.split("/");
-        for (int i = 1; i < paths.length; i++) {
-          String path = paths[i];
-          if (path != "Android") {
-            newPath += "/" + path;
-          } else {
-            break;
-          }
-        }
-        newPath = newPath + "/Pictures/Wallpapers";
-        directory = Directory(newPath);
-      } else {
-        directory = await getApplicationDocumentsDirectory();
-      }
-
-      if (!await directory.exists()) {
-        await directory.create(recursive: true);
-      }
-
-      String fileName = url.split('/').last;
-      String filePath = "${directory.path}/$fileName";
-
-      await dio.download(url, filePath);
-      return filePath;
-    } catch (e) {
-      print("Error downloading wallpaper: $e");
-      return null;
-    }
-  }
-}

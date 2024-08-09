@@ -1,58 +1,49 @@
-// ignore: file_names
-class WallPapersModel {
-  int id;
-  String categoryName;
-  String categoryImage;
-  List<CategoryWallpaper> categoryWallpapers;
+class HomeRandomWallpapersModel {
+  String? message;
+  List<Getwall>? getwall;
 
-  WallPapersModel({
-    required this.id,
-    required this.categoryName,
-    required this.categoryImage,
-    required this.categoryWallpapers,
+  HomeRandomWallpapersModel({
+    this.message,
+    this.getwall,
   });
 
-  factory WallPapersModel.fromJson(Map<String, dynamic> json) =>
-      WallPapersModel(
-        id: json["id"] ?? 0,
-        categoryName: json["category_name"] ?? "",
-        categoryImage: json["category_image"] ?? "",
-        categoryWallpapers: json["category_wallpapers"] != null
-            ? List<CategoryWallpaper>.from(json["category_wallpapers"]
-                .map((x) => CategoryWallpaper.fromJson(x)))
-            : [],
-      );
+  factory HomeRandomWallpapersModel.fromJson(Map<String, dynamic> json) => HomeRandomWallpapersModel(
+    message: json["message"] as String?,
+    getwall: (json["getwall"] as List<dynamic>?)
+        ?.map((x) => Getwall.fromJson(x as Map<String, dynamic>))
+        .toList(),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "category_name": categoryName,
-        "category_image": categoryImage,
-        "category_wallpapers":
-            List<dynamic>.from(categoryWallpapers.map((x) => x.toJson())),
-      };
+    "message": message,
+    "getwall": getwall?.map((x) => x.toJson()).toList(),
+  };
 }
 
-class CategoryWallpaper {
-  int id;
-  String wallpaperTitle;
+class Getwall {
+  int? id;
+  int? categoryId;
   String? wallpaperImageUrl;
+  String? wallpaperTitle;
 
-  CategoryWallpaper({
-    required this.id,
-    required this.wallpaperTitle,
+  Getwall({
+    this.id,
+    this.categoryId,
     this.wallpaperImageUrl,
+    this.wallpaperTitle,
   });
 
-  factory CategoryWallpaper.fromJson(Map<String, dynamic> json) =>
-      CategoryWallpaper(
-        id: json["id"] ?? 0,
-        wallpaperTitle: json["wallpaper_title"] ?? "",
-        wallpaperImageUrl: json["wallpaper_image_url"],
-      );
+  factory Getwall.fromJson(Map<String, dynamic> json) => Getwall(
+    id: json["id"] as int?,
+    categoryId: json["categoryId"] as int?,
+    wallpaperImageUrl: json["wallpaper_image_url"] as String?,
+    wallpaperTitle: json["wallpaper_title"] as String?,
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "wallpaper_title": wallpaperTitle,
-        "wallpaper_image_url": wallpaperImageUrl,
-      };
+    "id": id,
+    "categoryId": categoryId,
+    "wallpaper_image_url": wallpaperImageUrl,
+    "wallpaper_title": wallpaperTitle,
+  };
 }

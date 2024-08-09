@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen>
                 backgroundColor: Colors.transparent,
                 pinned: true,
                 bottom: const PreferredSize(
-                  preferredSize: Size.fromHeight(-20.0),
+                  preferredSize: Size.fromHeight(-40.0),
                   child: SizedBox(),
                 ),
                 flexibleSpace: CustomTabTitles(

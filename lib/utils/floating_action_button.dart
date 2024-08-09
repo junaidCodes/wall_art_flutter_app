@@ -5,7 +5,11 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:wall_art/utils/app_colors.dart';
 
 class FloatingActionButtonWidget extends StatefulWidget {
-  const FloatingActionButtonWidget({super.key});
+  void Function()? onTap ;
+  void Function()? onTapLock ;
+  void Function()? onTapBoth ;
+
+   FloatingActionButtonWidget({super.key, required this.onTap, this.onTapLock, this.onTapBoth});
 
   @override
   State<FloatingActionButtonWidget> createState() =>
@@ -33,9 +37,7 @@ class _FloatingActionButtonWidgetState
       children: [
         SpeedDialChild(
             backgroundColor: Colors.transparent,
-            onTap: () {
-              log("message");
-            },
+            onTap: widget.onTap ,
             label: "Download",
             child: Container(
               clipBehavior: Clip.hardEdge,
@@ -72,6 +74,14 @@ class _FloatingActionButtonWidgetState
             onTap: () {},
             label: "Set Wallpaper",
             child: const Icon(Icons.wallpaper)),
+        SpeedDialChild(
+            onTap: widget.onTapLock,
+            label: "Set Lock Screen",
+            child: const Icon(Icons.wallpaper_outlined)),
+        SpeedDialChild(
+            onTap: widget.onTapBoth,
+            label: "Set Both",
+            child: const Icon(Icons.lock)),
       ],
     );
   }

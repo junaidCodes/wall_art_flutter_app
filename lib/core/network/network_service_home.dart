@@ -8,7 +8,7 @@ class NetworkServiceHome {
 
   Future<List<HomeWallpapersModel>> getService() async {
     try {
-      String url = 'http://192.168.42.249:3307/api/home';
+      String url = 'http://192.168.42.249:3000/api/home';
 
       Response response = await dio.get(url);
 

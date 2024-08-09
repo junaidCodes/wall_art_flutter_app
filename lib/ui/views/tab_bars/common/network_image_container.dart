@@ -7,6 +7,7 @@ class NetworkImageContainer extends StatefulWidget {
   String path;
   VoidCallback? onPressed;
 
+
   NetworkImageContainer({super.key, required this.path, this.onPressed});
 
   @override
@@ -34,9 +35,13 @@ class _NetworkImageContainerState extends State<NetworkImageContainer> {
                 placeholder: (context, url) => Image.asset(
                   PathToImage.placeholder,
                   fit: BoxFit.cover,
+
+
                 ),
                 imageUrl: widget.path,
                 fit: BoxFit.cover,
+
+
               ),
             )),
       ),

@@ -92,7 +92,7 @@ class _CategoryTabState extends State<CategoryTab> {
                         image: DecorationImage(
                           fit: BoxFit.cover,
                           // image:  NetworkImage(catWallpapers!),
-                          image: AssetImage(PathToImage.walpapers[index]),
+                          image: AssetImage(PathToImage.weeding[index]),
                         ),
                         border: Border.all(
                             color: Colors.black), // optional: add border
@@ -126,19 +126,19 @@ class _CategoryTabState extends State<CategoryTab> {
 
       case 1:
         Navigator.pushNamed(context, RouteName.walpapersView, arguments: {
-          'arg': PathToImage.abstract,
+          'arg': PathToImage.weeding,
           'title': categoryNames[index]
         });
         break;
       case 2:
         Navigator.pushNamed(context, RouteName.walpapersView, arguments: {
-          'arg': PathToImage.animal,
+          'arg': PathToImage.weeding,
           'title': categoryNames[index]
         });
         break;
       case 3:
         Navigator.pushNamed(context, RouteName.walpapersView, arguments: {
-          'arg': PathToImage.walpapers,
+          'arg': PathToImage.weeding,
           'title': categoryNames[index]
         });
         break;

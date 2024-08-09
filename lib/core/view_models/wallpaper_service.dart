@@ -19,35 +19,35 @@ class WallpaperService with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setWallpaper(String imagePath, BuildContext context) async {
-    loading = true;
-    log("runnging");
-    try {
-      // Copy asset image to local file
-      final filePath = await copyAssetToFile(imagePath);
-      // Set the wallpaper
-      final bool result = await AsyncWallpaper.setWallpaperFromFile(
-        filePath: filePath,
-        wallpaperLocation: AsyncWallpaper.BOTH_SCREENS,
-      );
-
-      if (result) {
-        loading = false;
-
-        context.showSnackBar(
-            "Wallpaper Applied successfully!", Colors.green, Colors.white);
-        log("success");
-      } else {
-        loading = false;
-        context.showSnackBar(
-            'Failed to set wallpaper.', Colors.grey, Colors.white);
-        log("failed");
-      }
-    } catch (e) {
-      log(e.toString());
-    }
-    notifyListeners();
-  }
+  // Future<void> setWallpaper(String imagePath, BuildContext context) async {
+  //   loading = true;
+  //   log("runnging");
+  //   try {
+  //     // Copy asset image to local file
+  //     final filePath = await copyAssetToFile(imagePath);
+  //     // Set the wallpaper
+  //     final bool result = await AsyncWallpaper.setWallpaperFromFile(
+  //       filePath: filePath,
+  //       wallpaperLocation: AsyncWallpaper.BOTH_SCREENS,
+  //     );
+  //
+  //     if (result) {
+  //       loading = false;
+  //
+  //       context.showSnackBar(
+  //           "Wallpaper Applied successfully!", Colors.green, Colors.white);
+  //       log("success");
+  //     } else {
+  //       loading = false;
+  //       context.showSnackBar(
+  //           'Failed to set wallpaper.', Colors.grey, Colors.white);
+  //       log("failed");
+  //     }
+  //   } catch (e) {
+  //     log(e.toString());
+  //   }
+  //   notifyListeners();
+  // }
 
   Future<void> addToFavorites(String path) async {
     final prefs = await SharedPreferences.getInstance();

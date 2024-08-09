@@ -1,35 +1,28 @@
-// // Adjust this import based on your project structure
+import 'dart:developer';
 
-// import 'dart:developer';
+import 'package:device_preview/device_preview.dart';
+import 'package:dio/dio.dart';
+import 'package:wall_art/core/models/wallpapersModel.dart';
+ // Ensure this imports your Item model class
 
-// import 'package:dio/dio.dart';
-// import 'package:wall_art/core/models/home_wallpapers_model.dart';
-// import 'package:wall_art/core/models/wallpapersModel.dart';
-// // Adjust this import based on your project structure
+class RandomWallpaperApiService {
 
-// class NetworkService {
-//   static Dio _dio = Dio();
+  final Dio _dio = Dio();
+  final String url = 'http://192.168.42.249:3000/api/wallpapers'; // Replace with your API base URL
 
-//   static Future<List<HomeWallpapersModel>> fetchWallpapers() async {
-//     try {
-//       String url = 'http://192.168.200.104:3000/api/home';
-//       log("here");
-//       Response response = await _dio.get(
-//         'http://192.168.200.104:3000/api/categorywallpaper',
-//       );
-//       log("gere");
-//       if (response.statusCode == 200 || response.statusCode == 201) {
-//         log(response.statusCode.toString());
+  Future<HomeRandomWallpapersModel> fetchItem() async {
+    try {
+      Response response = await _dio.get(url);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        log("status code iss ${response.statusCode}");
 
-//         List<dynamic> data = response.data;
-//         List<HomeWallpapersModel> wallpapers =
-//             data.map((e) => HomeWallpapersModel.fromJson(e)).toList();
-//         return wallpapers;
-//       } else {
-//         throw Exception("Failed to load wallpapersfff");
-//       }
-//     } catch (e) {
-//       throw Exception("NetworkService Errror: $e");
-//     }
-//   }
-// }
+        return HomeRandomWallpapersModel.fromJson(response.data);
+
+      } else {
+        throw Exception('Failed to load item');
+      }
+    } catch (error) {
+      throw Exception('Failed to load item: $error');
+    }
+  }
+}

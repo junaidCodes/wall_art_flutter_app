@@ -8,6 +8,7 @@ import 'package:wall_art/core/view_models/onboard_slider_provider.dart';
 import 'package:wall_art/core/view_models/wallpaper_service.dart';
 import 'package:wall_art/routes/route_names.dart';
 import 'package:wall_art/routes/routes.dart';
+import 'package:wall_art/utils/ex.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

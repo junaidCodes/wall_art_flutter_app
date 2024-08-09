@@ -2,6 +2,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wall_art/core/network/network_service.dart';
 import 'package:wall_art/core/network/network_service_home.dart';
 import 'package:wall_art/core/view_models/wallpaper_service.dart';
 import 'package:wall_art/routes/route_names.dart';
@@ -27,16 +28,18 @@ class _HomeTabState extends State<HomeTab> {
     wallPapers = walls;
     wallpaperService.notifyListner();
   }
-
+  RandomWallpaperApiService randomWallpaperApiService = RandomWallpaperApiService();
   @override
   void initState() {
     super.initState();
     getWallpapers();
+    randomWallpaperApiService.fetchItem();
   }
 
   @override
   Widget build(BuildContext context) {
-    log("buildinggg");
+
+
     return Consumer<WallpaperService>(builder: (context, value, child) {
       return wallPapers.isEmpty
           ? const Center(
@@ -65,6 +68,7 @@ class _HomeTabState extends State<HomeTab> {
                                       .toList(),
                                   'title': homeWallpapersModel.categoryName
                                 });
+
                           },
                         ),
                         SizedBox(
@@ -79,7 +83,7 @@ class _HomeTabState extends State<HomeTab> {
                                         .categoryWallpapers[wallpaperIndex];
                                 return NetworkImageContainer(
                                     onPressed: () {
-                                      log("message");
+
 
                                       Navigator.pushNamed(
                                           context, RouteName.walpaperSlider,
@@ -100,4 +104,5 @@ class _HomeTabState extends State<HomeTab> {
             );
     });
   }
+
 }
